@@ -223,7 +223,7 @@ class AbacusExportFile(Document):
     # prepare transfer file
     def render_transfer_file(self, restrict_currencies=None):
         if restrict_currencies and type(restrict_currencies) == str:
-            restrict_currencies = ast.list_eval(restrict_currencies)
+            restrict_currencies = ast.literal_eval(restrict_currencies)
         # collect task information
         if self.aggregated == 1:
             """ aggregated method """
