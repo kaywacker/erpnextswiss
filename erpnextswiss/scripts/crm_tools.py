@@ -42,6 +42,7 @@ def _get_primary_link(link_doctype, link_name, parenttype, primary_field):
 # fetch the first available address from a customer
 @frappe.whitelist()
 def get_customer_address(customer):
+    frappe.has_permission("Customer", "read", customer, throw=True)
     name = _get_first_link("Customer", customer, "Address")
     return frappe.get_doc("Address", name) if name else None
 
@@ -49,6 +50,7 @@ def get_customer_address(customer):
 # fetch the primary available address from a customer
 @frappe.whitelist()
 def get_primary_customer_address(customer):
+    frappe.has_permission("Customer", "read", customer, throw=True)
     name = _get_primary_link("Customer", customer, "Address", "is_primary_address")
     return frappe.get_doc("Address", name) if name else None
 
@@ -56,6 +58,7 @@ def get_primary_customer_address(customer):
 # fetch the primary available contact from a customer
 @frappe.whitelist()
 def get_primary_customer_contact(customer):
+    frappe.has_permission("Customer", "read", customer, throw=True)
     name = _get_primary_link("Customer", customer, "Contact", "is_primary_contact")
     return frappe.get_doc("Contact", name) if name else None
 
@@ -63,6 +66,7 @@ def get_primary_customer_contact(customer):
 # fetch the first available contact from a customer
 @frappe.whitelist()
 def get_customer_contact(customer):
+    frappe.has_permission("Customer", "read", customer, throw=True)
     name = _get_first_link("Customer", customer, "Contact")
     return frappe.get_doc("Contact", name) if name else None
 
@@ -70,6 +74,7 @@ def get_customer_contact(customer):
 # fetch the first available address from a supplier
 @frappe.whitelist()
 def get_supplier_address(supplier):
+    frappe.has_permission("Supplier", "read", supplier, throw=True)
     name = _get_first_link("Supplier", supplier, "Address")
     return frappe.get_doc("Address", name) if name else None
 
@@ -77,6 +82,7 @@ def get_supplier_address(supplier):
 # fetch the primary available address from a supplier
 @frappe.whitelist()
 def get_primary_supplier_address(supplier):
+    frappe.has_permission("Supplier", "read", supplier, throw=True)
     name = _get_primary_link("Supplier", supplier, "Address", "is_primary_address")
     return frappe.get_doc("Address", name) if name else None
 
@@ -84,6 +90,7 @@ def get_primary_supplier_address(supplier):
 # fetch the primary available contact from a supplier
 @frappe.whitelist()
 def get_primary_supplier_contact(supplier):
+    frappe.has_permission("Supplier", "read", supplier, throw=True)
     name = _get_primary_link("Supplier", supplier, "Contact", "is_primary_contact")
     return frappe.get_doc("Contact", name) if name else None
 
@@ -91,12 +98,14 @@ def get_primary_supplier_contact(supplier):
 # fetch the primary available address from a company
 @frappe.whitelist()
 def get_primary_company_address(company):
+    frappe.has_permission("Company", "read", company, throw=True)
     name = _get_primary_link("Company", company, "Address", "is_primary_address")
     return frappe.get_doc("Address", name) if name else None
 
 
 @frappe.whitelist()
 def update_contact_first_and_last_name(contact, firstname, lastname):
+    frappe.has_permission("Contact", "write", contact, throw=True)
     contact = frappe.get_doc("Contact", contact)
     contact.first_name = firstname
     contact.last_name = lastname
@@ -115,6 +124,8 @@ def change_customer_without_impact_on_price(dt, record, customer, address=None, 
         frappe.throw("Unsupported doctype: {0}".format(frappe.utils.cstr(dt)))
     if not frappe.db.exists(dt, record):
         frappe.throw("{0} {1} not found".format(dt, frappe.utils.cstr(record)))
+    frappe.has_permission(dt, "write", record, throw=True)
+    frappe.has_permission("Customer", "read", customer, throw=True)
     customer_doc = frappe.get_doc("Customer", customer)
 
     if dt == "Quotation":

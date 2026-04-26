@@ -13,6 +13,7 @@ import re
 # fetch supplier based on participant number
 @frappe.whitelist()
 def get_supplier_based_on_esr(participant):
+    frappe.has_permission("Supplier", "read", throw=True)
     participant_to_search = participant.replace("", "%").replace("0", "")
     supplier = frappe.db.sql("""SELECT `name`, `supplier_name` FROM `tabSupplier` WHERE `esr_participation_number` LIKE %s""", (participant_to_search,), as_dict=True)
     if len(supplier) > 0:
@@ -39,6 +40,7 @@ def get_supplier_based_on_esr(participant):
 # fetch default_item from settings
 @frappe.whitelist()
 def check_defaults():
+    frappe.has_permission("ERPNextSwiss Settings", "read", throw=True)
     defaults = {}
     missing_values = []
     settings = frappe.get_single('ERPNextSwiss Settings')
