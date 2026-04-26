@@ -18,7 +18,7 @@ try:
 except:
     from facturx import generate_facturx_from_binary as generate_from_binary
 from erpnextswiss.erpnextswiss.zugferd.zugferd import import_pdf, get_facturx_xml_from_pdf, xml_check_xsd
-from PyPDF4 import PdfFileReader
+from pypdf import PdfReader
 
 class TestZugferd(unittest.TestCase):
     pass
@@ -42,7 +42,7 @@ def create_pdf ():
     return
 
 def check_pdf_reader(path):
-    pdf = PdfFileReader(path)
+    pdf = PdfReader(path)
     print("{0}".format(pdf))
     return
     

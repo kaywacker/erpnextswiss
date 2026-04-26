@@ -6,7 +6,7 @@ import traceback
 from frappe import _
 from frappe.utils import today, add_days
 from frappe.utils.file_manager import save_file, get_file, remove_file_by_url
-from PyPDF2 import PdfFileReader
+from pypdf import PdfReader
 
 
 @frappe.whitelist()
@@ -66,8 +66,8 @@ def job_to_raw_bytes(print_job):
         # PDF direct printing (Zebra): Determine document width and set it using a printer command
         # (a workaround to ensure the printing width is always set correctly)
         pdf_stream = io.BytesIO(job_data)
-        pdf_reader = PdfFileReader(pdf_stream)
-        print_width = pdf_reader.pages[0].mediaBox.getWidth()*25.4/72 # Convert point to mm
+        pdf_reader = PdfReader(pdf_stream)
+        print_width = float(pdf_reader.pages[0].mediabox.width) * 25.4 / 72  # Convert point to mm
         zebra_width = round(print_width*label_printer.pdf_direct_dpi/25.4) # Convert mm to Zebra-points
         pdf_stream.close()
         width_command = "! U1 setvar \"ezpl.print_width\" \"{width}\"\r\n".format(width=zebra_width).encode()
