@@ -181,7 +181,23 @@ scheduler_events = {
 
 # Fixtures (to import DocType customisations)
 # --------
-fixtures = ["Custom Field"]
+fixtures = [
+    "Custom Field",
+    {
+        "doctype": "Tax Category",
+        "filters": [["name", "in", [
+            "S: Standard Tax",
+            "AE: Reverse Charge",
+            "E: Tax Exempt",
+            "Z: Zero-Tax Goods",
+            "O: Services without Tax",
+            "G: Export outside EU",
+            "K: Innercommunal Taxes",
+            "L: IGIC (Kanarische Inseln)",
+            "M: IPSI (Ceuta/Melilla)"
+        ]]]
+    }
+]
 
 domains = {
     'HLK': 'erpnextswiss.domains.hlk'

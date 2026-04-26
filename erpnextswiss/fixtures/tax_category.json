@@ -1,0 +1,56 @@
+[
+ {
+  "disabled": 0,
+  "doctype": "Tax Category",
+  "name": "S: Standard Tax",
+  "title": "S: Standard Tax"
+ },
+ {
+  "disabled": 0,
+  "doctype": "Tax Category",
+  "name": "AE: Reverse Charge",
+  "title": "AE: Reverse Charge"
+ },
+ {
+  "disabled": 0,
+  "doctype": "Tax Category",
+  "name": "E: Tax Exempt",
+  "title": "E: Tax Exempt"
+ },
+ {
+  "disabled": 0,
+  "doctype": "Tax Category",
+  "name": "Z: Zero-Tax Goods",
+  "title": "Z: Zero-Tax Goods"
+ },
+ {
+  "disabled": 0,
+  "doctype": "Tax Category",
+  "name": "O: Services without Tax",
+  "title": "O: Services without Tax"
+ },
+ {
+  "disabled": 0,
+  "doctype": "Tax Category",
+  "name": "G: Export outside EU",
+  "title": "G: Export outside EU"
+ },
+ {
+  "disabled": 0,
+  "doctype": "Tax Category",
+  "name": "K: Innercommunal Taxes",
+  "title": "K: Innercommunal Taxes"
+ },
+ {
+  "disabled": 0,
+  "doctype": "Tax Category",
+  "name": "L: IGIC (Kanarische Inseln)",
+  "title": "L: IGIC (Kanarische Inseln)"
+ },
+ {
+  "disabled": 0,
+  "doctype": "Tax Category",
+  "name": "M: IPSI (Ceuta/Melilla)",
+  "title": "M: IPSI (Ceuta/Melilla)"
+ }
+]
