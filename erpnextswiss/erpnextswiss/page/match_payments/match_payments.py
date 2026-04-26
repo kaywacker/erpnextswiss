@@ -2,6 +2,7 @@
 # License: AGPL v3. See LICENCE
 
 from __future__ import unicode_literals
+import json
 import frappe
 from frappe import throw, _
 from erpnextswiss.erpnextswiss.page.bankimport.bankimport import create_reference
@@ -59,7 +60,7 @@ def submit(payment_entry):
 @frappe.whitelist()
 def submit_all(payment_entries):
     # get the array from the string parameter
-    payments = eval(payment_entries)
+    payments = json.loads(payment_entries) if isinstance(payment_entries, str) else payment_entries
     # loop through all matched payments and submit them
     for payment_entry in payments:
         submit(payment_entry)

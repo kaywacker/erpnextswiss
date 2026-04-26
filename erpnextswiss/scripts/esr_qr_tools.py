@@ -14,7 +14,7 @@ import re
 @frappe.whitelist()
 def get_supplier_based_on_esr(participant):
     participant_to_search = participant.replace("", "%").replace("0", "")
-    supplier = frappe.db.sql("""SELECT `name`, `supplier_name` FROM `tabSupplier` WHERE `esr_participation_number` LIKE '{participant}'""".format(participant=participant_to_search), as_dict=True)
+    supplier = frappe.db.sql("""SELECT `name`, `supplier_name` FROM `tabSupplier` WHERE `esr_participation_number` LIKE %s""", (participant_to_search,), as_dict=True)
     if len(supplier) > 0:
         if len(supplier) > 1:
             return {
